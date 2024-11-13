@@ -9,7 +9,7 @@ let template = [
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
 	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default"],
 	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "floor_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "block_table_default", "block_wall_default"],
+	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_votestationL", "block_table_default", "block_wall_default"],
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
 	["block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default"]
@@ -49,9 +49,12 @@ for (var y=0; y<GRID_HEIGHT; y++) {
 			if (str.includes("_wall_default") || str.includes("_wall_window")) {
 				xOffset = 0;
 				yOffset = -16;
-			} else if  ((str.includes("_table_default"))) {
+			} else if  (str.includes("_table_default") || str.includes("_table_votestationL")) {
 				xOffset = 0;
 				yOffset = -6;
+			} else if  (str.includes("_table_votbox")) {
+				xOffset = 0;
+				yOffset = -7;
 			}
 			row.push(new Block(x, y, xOffset, yOffset, str.replace("block_", "")));
 

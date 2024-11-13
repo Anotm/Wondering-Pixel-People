@@ -1,10 +1,10 @@
 class Floor {
 
-	constructor(cell_x, cell_y, floor_type="default") {
+	constructor(cellX, cellY, floorType="default") {
 		this.sprite = new Image();
-		this.sprite.src = "./img/floor/floor_" + floor_type + ".png";
-		this.x = cell_x * CELL_WIDTH;
-		this.y = cell_y * CELL_WIDTH;
+		this.sprite.src = "./img/floor/floor_" + floorType + ".png";
+		this.x = cellX * CELL_WIDTH;
+		this.y = cellY * CELL_WIDTH;
 	}
 
 	draw() {

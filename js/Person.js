@@ -1,5 +1,5 @@
 class Person {
-	constructor(isComp, personType, cellX, cellY, sprite) {
+	constructor(isComp, personType, cellX, cellY) {
 		this.isComp = isComp;
 		this.personType = personType;
 
@@ -14,7 +14,7 @@ class Person {
 
 		this.dir = 0; // 0-Down 1-Left 2-Right 3-UP
 		this.sprite = new Image();
-		this.sprite.src = sprite;
+		this.sprite.src = "./img/person/" + personType + ".png";
 		this.frameCount = 4;
 		this.currentFrame = 0;
 		this.frameWidth = 16;
@@ -72,6 +72,5 @@ class Person {
 		this.targetX = cellX * CELL_WIDTH;
 		this.targetY = cellY * CELL_WIDTH;
 		this.destSet = true;
-		console.log(this.targetX, this.targetY);
 	}
 }

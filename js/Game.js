@@ -1,18 +1,12 @@
 class Game {
-	constructor() {
+
+	constructor(roomGrid) {
 		canvas.attr("width", CANVAS_WIDTH);
 		canvas.attr("height", CANVAS_HEIGHT);
 		// this.drawGrid();
-		this.person = new Person(false, "bob", 5, 5, "./img/person/soldier.png");
+		this.person = new Person(false, "soldier", 5, 5);
 
-		this.roomGrid = [];
-		for (var i=0; i<GRID_HEIGHT; i++) {
-			var row = [];
-			for (var j=0; j<GRID_WIDTH; j++) {
-				row.push(new Floor(j,i));
-			}
-			this.roomGrid.push(row);
-		}
+		this.roomGrid = roomGrid;
 
 		this.personGrid = [];
 		for (var i=0; i<GRID_HEIGHT; i++) {
@@ -53,8 +47,25 @@ class Game {
 	async draw() {
 		ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 		// this.drawGrid();
-		this.drawRoom();
+
+		for(const row of this.roomGrid) {
+			for (const tile of row) {
+				if (tile.constructor.name == "Floor") {
+					tile.draw();
+				}
+			}
+		}
+
 		this.person.draw();
+
+		for(const row of this.roomGrid) {
+			for (const tile of row) {
+				if (tile.constructor.name == "Block") {
+					tile.draw();
+				}
+			}
+		}
+
 		this.person.move();
 	}
 }

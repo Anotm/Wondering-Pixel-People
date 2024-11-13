@@ -1,12 +1,27 @@
 class Game {
-
 	constructor() {
 		canvas.attr("width", CANVAS_WIDTH);
 		canvas.attr("height", CANVAS_HEIGHT);
-		this.drawGrid();
+		// this.drawGrid();
 		this.person = new Person(false, "bob", 5, 5, "./img/person/soldier.png");
 
-		this.gameGrid = [];
+		this.roomGrid = [];
+		for (var i=0; i<GRID_HEIGHT; i++) {
+			var row = [];
+			for (var j=0; j<GRID_WIDTH; j++) {
+				row.push(new Floor(j,i));
+			}
+			this.roomGrid.push(row);
+		}
+
+		this.personGrid = [];
+		for (var i=0; i<GRID_HEIGHT; i++) {
+			var row = [];
+			for (var j=0; j<GRID_WIDTH; j++) {
+				row.push(null);
+			}
+			this.personGrid.push(row);
+		}
 
 		setInterval(function(){this.draw()}.bind(this), 100);
 	}
@@ -27,9 +42,18 @@ class Game {
 		}
 	}
 
+	drawRoom() {
+		for(const row of this.roomGrid) {
+			for (const tile of row) {
+				tile.draw();
+			}
+		}
+	}
+
 	async draw() {
 		ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		this.drawGrid();
+		// this.drawGrid();
+		this.drawRoom();
 		this.person.draw();
 		this.person.move();
 	}

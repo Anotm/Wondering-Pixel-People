@@ -73,4 +73,10 @@ class Person {
 		this.targetY = cellY * CELL_WIDTH;
 		this.destSet = true;
 	}
+
+	face(dir) {
+		// 0-Down 1-Left 2-Right 3-UP
+		this.dir = dir;
+		this.draw();
+	}
 }

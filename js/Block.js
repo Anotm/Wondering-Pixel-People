@@ -1,6 +1,6 @@
 class Block {
 
-	constructor(cellX, cellY, xOffset, yOffset, blockType="default") {
+	constructor(cellX, cellY, xOffset, yOffset, blockType="wall_default") {
 		this.sprite = new Image();
 		this.sprite.src = "./img/block/block_" + blockType + ".png";
 		this.xOffset = xOffset;

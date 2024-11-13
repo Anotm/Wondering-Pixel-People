@@ -4,11 +4,11 @@ class Game {
 		canvas.attr("width", CANVAS_WIDTH);
 		canvas.attr("height", CANVAS_HEIGHT);
 		this.drawGrid();
-		this.person = new Person(false, "bob", 5, 5);
+		this.person = new Person(false, "bob", 5, 5, "./img/person/soldier.png");
 
 		this.gameGrid = [];
 
-		setInterval(function(){this.draw()}.bind(this), 10);
+		setInterval(function(){this.draw()}.bind(this), 100);
 	}
 
 	drawGrid() {

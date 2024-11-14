@@ -4,7 +4,8 @@ class Game {
 		canvas.attr("width", CANVAS_WIDTH);
 		canvas.attr("height", CANVAS_HEIGHT);
 		// this.drawGrid();
-		this.person = new Person(false, "soldier", 5, 5);
+		this.persons = [];
+		this.persons.push(new Person(false, "soldier", 5, 5));
 
 		this.roomGrid = roomGrid;
 
@@ -50,22 +51,36 @@ class Game {
 
 		for(const row of this.roomGrid) {
 			for (const tile of row) {
-				if (tile.constructor.name == "Floor") {
-					tile.draw();
-				}
+				tile.draw();
 			}
 		}
 
-		this.person.draw();
-
-		for(const row of this.roomGrid) {
-			for (const tile of row) {
-				if (tile.constructor.name == "Block") {
-					tile.draw();
-				}
+		for (const p of this.persons) {
+			p.draw();
+			let currCellX = Math.floor(p.x / CELL_WIDTH);
+			let currCellY = Math.floor(p.y / CELL_WIDTH);
+			if (this.roomGrid[currCellY][currCellX-1].constructor.name == "Block") {
+				this.roomGrid[currCellY][currCellX-1].draw();
+			}
+			if (this.roomGrid[currCellY][currCellX].constructor.name == "Block") {
+				this.roomGrid[currCellY][currCellX].draw();
+			}
+			if (this.roomGrid[currCellY][currCellX+1].constructor.name == "Block") {
+				this.roomGrid[currCellY][currCellX+1].draw();
+			}
+			if (this.roomGrid[currCellY+1][currCellX-1].constructor.name == "Block") {
+				this.roomGrid[currCellY+1][currCellX-1].draw();
+			}
+			if (this.roomGrid[currCellY+1][currCellX].constructor.name == "Block") {
+				this.roomGrid[currCellY+1][currCellX].draw();
+			}
+			if (this.roomGrid[currCellY+1][currCellX+1].constructor.name == "Block") {
+				this.roomGrid[currCellY+1][currCellX+1].draw();
 			}
 		}
 
-		this.person.move();
+		for (const p of this.persons) {
+			p.move();
+		}
 	}
 }

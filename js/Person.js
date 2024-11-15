@@ -11,6 +11,8 @@ class Person {
 		this.frameWidth = 16;
 		this.frameHeight = 25;
 
+		this.hasObject = false;
+
 		this.x = cellX * CELL_WIDTH;
 		this.y = cellY * CELL_WIDTH;
 		this.dx = CELL_WIDTH / 4;
@@ -106,5 +108,15 @@ class Person {
 		// 0-Down 1-Left 2-Right 3-UP
 		this.dir = dir;
 		this.draw();
+	}
+
+	toggleObject() {
+		if (this.hasObject) {
+			this.sprite.src = "./img/person/" + this.personType + ".png";
+			this.hasObject = false;
+		} else {
+			this.sprite.src = "./img/person/" + this.personType + "_object.png";
+			this.hasObject = true;
+		}
 	}
 }

@@ -6,6 +6,7 @@ class Game {
 		// this.drawGrid();
 
 		this.persons = [];
+		this.persons.push(new Person(true, "recep1", 8, 5, 1));
 		this.persons.push(new Person(false, "soldier", 5, 5));
 
 		this.roomGrid = roomGrid;

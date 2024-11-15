@@ -4,42 +4,16 @@ const floorDefault = new Floor(0,0);
 let grid10x10 = [];
 let template = [
 	["block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default"],
+	["block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default"],
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
+	["block_wall_default", "floor_default", "block_table_votestationR", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_votebox", "floor_default", "block_wall_default"],
 	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default"],
-	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "floor_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_votestationU", "block_table_default", "block_wall_default"],
+	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "floor_default", "floor_default"],
+	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "block_table_default", "block_wall_default"],
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
 	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
 	["block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default"]
 ];
-
-
-// for (var y=0; y<GRID_HEIGHT; y++) {
-// 	row = [];
-// 	for (var x=0; x<GRID_WIDTH; x++) {
-// 		if (y==0 || y==9) {
-// 			row.push(new Block(x,y,0,-16));
-// 			continue;
-// 		} else if (x==0 || x==9) {
-// 			row.push(new Block(x,y,0,-16));
-// 		} else {
-// 			row.push(new Floor(x,y));
-// 		}
-// 	}
-// 	grid10x10.push(row);
-// }
-
-// grid10x10[4][0] = new Floor(0,4);
-// grid10x10[5][0] = new Floor(0,5);
-// grid10x10[4][9] = new Floor(9,4);
-// grid10x10[5][9] = new Floor(9,5);
-
-// grid10x10[0][4] = new Floor(4,0);
-// grid10x10[0][5] = new Floor(5,0);
-// grid10x10[9][4] = new Floor(4,9);
-// grid10x10[9][5] = new Floor(5,9);
 
 for (var y=0; y<GRID_HEIGHT; y++) {
 	row = [];
@@ -49,10 +23,10 @@ for (var y=0; y<GRID_HEIGHT; y++) {
 			if (str.includes("_wall_default") || str.includes("_wall_window")) {
 				xOffset = 0;
 				yOffset = -16;
-			} else if  (str.includes("_table_default") || str.includes("_table_votestationL") || str.includes("_table_votestationU")) {
+			} else if  (str.includes("_table_default") || str.includes("_table_votestationL") || str.includes("_table_votestationR") || str.includes("_table_votestationU")) {
 				xOffset = 0;
 				yOffset = -6;
-			} else if  (str.includes("_table_votbox")) {
+			} else if  (str.includes("_table_votebox")) {
 				xOffset = 0;
 				yOffset = -7;
 			}

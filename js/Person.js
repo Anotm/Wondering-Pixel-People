@@ -1,5 +1,5 @@
 class Person {
-	constructor(isComp, personType, cellX, cellY) {
+	constructor(isComp, personType, cellX, cellY, face=0) {
 		this.isComp = isComp;
 		this.personType = personType;
 
@@ -24,6 +24,10 @@ class Person {
 
 		this.xOffset = 0;
 		this.yOffset = this.frameHeight-CELL_WIDTH;
+
+		this.sleepCounter = 0;
+
+		this.face(face);
 	}
 
 	draw() {
@@ -47,6 +51,12 @@ class Person {
 	}
 
 	move() {
+		if (this.sleepCounter > 0) {
+			console.log(this.sleepCounter);
+			this.sleepCounter --;
+			return;
+		}
+
 		if (this.x != this.targetX && this.destSet) {
 			const unit_vector = (this.targetX - this.x) / Math.abs(this.targetX - this.x)
 			this.x += this.dx * unit_vector;
@@ -118,5 +128,9 @@ class Person {
 			this.sprite.src = "./img/person/" + this.personType + "_object.png";
 			this.hasObject = true;
 		}
+	}
+
+	sleep(n) {
+		this.sleepCounter = n;
 	}
 }

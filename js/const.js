@@ -8,3 +8,8 @@ GRID_HEIGHT = 10; // cells
 
 CANVAS_WIDTH = CELL_WIDTH * GRID_WIDTH; // pixels
 CANVAS_HEIGHT = CELL_WIDTH * GRID_HEIGHT; // pixels
+
+leftKeyDown = false;
+rightKeyDown = false;
+upKeyDown = false;
+downKeyDown = false;

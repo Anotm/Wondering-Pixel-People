@@ -3,10 +3,6 @@ class Person {
 		this.isComp = isComp;
 		this.personType = personType;
 
-		this.targetX = 0;
-		this.targetY = 0;
-		this.destSet = false;
-
 		this.dir = 0; // 0-Down 1-Left 2-Right 3-UP
 		this.sprite = new Image();
 		this.sprite.src = "./img/person/" + personType + ".png";
@@ -19,6 +15,10 @@ class Person {
 		this.y = cellY * CELL_WIDTH;
 		this.dx = CELL_WIDTH / 4;
 		this.dy = CELL_WIDTH / 4;
+
+		this.targetX = this.x;
+		this.targetY = this.y;
+		this.destSet = false;
 
 		this.xOffset = 0;
 		this.yOffset = this.frameHeight-CELL_WIDTH;
@@ -75,6 +75,31 @@ class Person {
 		this.targetX = cellX * CELL_WIDTH;
 		this.targetY = cellY * CELL_WIDTH;
 		this.destSet = true;
+	}
+
+	moveDir(num) {
+		if (!this.destSet) {
+			switch (num) { // 0-Down 1-Left 2-Right 3-UP
+				case 0:
+					this.targetY += CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 1:
+					this.targetX -=CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 2:
+					this.targetX += CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 3:
+					this.targetY -= CELL_WIDTH;
+					this.destSet = true;
+					break
+				default:
+					break
+			}
+		}
 	}
 
 	face(dir) {

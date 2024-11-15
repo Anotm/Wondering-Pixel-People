@@ -1,1 +1,3 @@
-const game = new Game(getRoomGrid());
+$(document).ready(function(){
+	const game = new Game(getRoomGrid());
+});

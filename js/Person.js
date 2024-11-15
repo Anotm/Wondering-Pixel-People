@@ -24,7 +24,7 @@ class Person {
 
 		this.xOffset = 0;
 		this.yOffset = this.frameHeight-CELL_WIDTH;
-
+		
 		this.sleepCounter = 0;
 
 		this.face(face);
@@ -52,7 +52,7 @@ class Person {
 
 	move() {
 		if (this.sleepCounter > 0) {
-			console.log(this.sleepCounter);
+			// console.log(this.sleepCounter);
 			this.sleepCounter --;
 			return;
 		}

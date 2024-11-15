@@ -7,18 +7,12 @@ class Game {
 
 		this.persons = [];
 		this.persons.push(new Person(true, "recep1", 8, 5, 1));
-		this.persons.push(new Person(false, "soldier", 5, 5));
+		this.persons.push(new Person(true, "soldier", 5, 5));
+
+		this.instructions = [];
+		this.instructions.push(new Instructions("WONDER", this.persons[1]));
 
 		this.roomGrid = roomGrid;
-
-		this.personGrid = [];
-		for (var i=0; i<GRID_HEIGHT; i++) {
-			var row = [];
-			for (var j=0; j<GRID_WIDTH; j++) {
-				row.push(null);
-			}
-			this.personGrid.push(row);
-		}
 
 		$(document).keydown(function(e) {
 			let dir = 0;
@@ -151,8 +145,12 @@ class Game {
 			}
 		}
 
-		for (const p of this.persons) {
-			p.move();
+		// for (const p of this.persons) {
+		// 	p.move();
+		// }
+
+		for (const i of this.instructions) {
+			i.move();
 		}
 
 		this.draw();

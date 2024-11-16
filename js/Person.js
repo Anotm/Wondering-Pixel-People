@@ -1,24 +1,33 @@
 class Person {
-	constructor(isComp, personType, cell_x, cell_y, sprite) {
+	constructor(isComp, personType, cellX, cellY, face=0) {
 		this.isComp = isComp;
 		this.personType = personType;
 
-		this.x = cell_x * CELL_WIDTH;
-		this.y = cell_y * CELL_WIDTH;
+		this.dir = 0; // 0-Down 1-Left 2-Right 3-UP
+		this.sprite = new Image();
+		this.sprite.src = "./img/person/" + personType + ".png";
+		this.frameCount = 4;
+		this.currentFrame = 0;
+		this.frameWidth = 16;
+		this.frameHeight = 25;
+
+		this.hasObject = false;
+
+		this.x = cellX * CELL_WIDTH;
+		this.y = cellY * CELL_WIDTH;
 		this.dx = CELL_WIDTH / 4;
 		this.dy = CELL_WIDTH / 4;
 
-		this.target_x = 0;
-		this.target_y = 0;
-		this.dest_set = false;
+		this.targetX = this.x;
+		this.targetY = this.y;
+		this.destSet = false;
 
-		this.dir = 0; // 0-Down 1-Left 2-Right 3-UP
-		this.sprite = new Image();
-		this.sprite.src = sprite;
-		this.frame_count = 4;
-		this.current_frame = 0;
-		this.frame_width = 16;
-		this.frame_height = 25;
+		this.xOffset = 0;
+		this.yOffset = this.frameHeight-CELL_WIDTH;
+		
+		this.sleepCounter = 0;
+
+		this.face(face);
 	}
 
 	draw() {
@@ -30,48 +39,98 @@ class Person {
 
 		ctx.drawImage(
 			this.sprite,
-			this.current_frame*this.frame_width, // x of frame in sprite
-			this.dir*this.frame_height, // y of frame in sprite
-			this.frame_width, // width of frame in sprite
-			this.frame_height, // height of frame in sprite
+			this.currentFrame*this.frameWidth, // x of frame in sprite
+			this.dir*this.frameHeight, // y of frame in sprite
+			this.frameWidth, // width of frame in sprite
+			this.frameHeight, // height of frame in sprite
 			this.x, // x-coordinates of image on canvas
-			this.y-(this.frame_height-CELL_WIDTH), // y-coordinates of image on canvas
-			this.frame_width, // width of image on canvas
-			this.frame_height // height of image on canvas
+			this.y-(this.yOffset), // y-coordinates of image on canvas
+			this.frameWidth, // width of image on canvas
+			this.frameHeight // height of image on canvas
 		)
 	}
 
 	move() {
-		if (this.x != this.target_x && this.dest_set) {
-			const unit_vector = (this.target_x - this.x) / Math.abs(this.target_x - this.x)
+		if (this.sleepCounter > 0) {
+			// console.log(this.sleepCounter);
+			this.sleepCounter --;
+			return;
+		}
+
+		if (this.x != this.targetX && this.destSet) {
+			const unit_vector = (this.targetX - this.x) / Math.abs(this.targetX - this.x)
 			this.x += this.dx * unit_vector;
 			if (unit_vector == -1) {
 				this.dir = 1
 			} else {
 				this.dir = 2
 			}
-			this.current_frame = (this.current_frame + 1) % this.frame_count;
-		} else if (this.y != this.target_y && this.dest_set) {
-			const unit_vector = (this.target_y - this.y) / Math.abs(this.target_y - this.y)
+			this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+		} else if (this.y != this.targetY && this.destSet) {
+			const unit_vector = (this.targetY - this.y) / Math.abs(this.targetY - this.y)
 			this.y += this.dy * unit_vector;
 			if (unit_vector == -1) {
 				this.dir = 3
 			} else {
 				this.dir = 0
 			}
-			this.current_frame = (this.current_frame + 1) % this.frame_count;
+			this.currentFrame = (this.currentFrame + 1) % this.frameCount;
 		}
 
-		if (this.x == this.target_x && this.y == this.target_y && this.dest_set) {
-			this.dest_set = false;
+		if (this.x == this.targetX && this.y == this.targetY && this.destSet) {
+			this.destSet = false;
 		}
 
 	}
 
-	moveCell(cell_x, cell_y) {
-		this.target_x = cell_x * CELL_WIDTH;
-		this.target_y = cell_y * CELL_WIDTH;
-		this.dest_set = true;
-		console.log(this.target_x, this.target_y);
+	moveCell(cellX, cellY) {
+		this.targetX = cellX * CELL_WIDTH;
+		this.targetY = cellY * CELL_WIDTH;
+		this.destSet = true;
+	}
+
+	moveDir(num) {
+		if (!this.destSet) {
+			switch (num) { // 0-Down 1-Left 2-Right 3-UP
+				case 0:
+					this.targetY += CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 1:
+					this.targetX -=CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 2:
+					this.targetX += CELL_WIDTH;
+					this.destSet = true;
+					break
+				case 3:
+					this.targetY -= CELL_WIDTH;
+					this.destSet = true;
+					break
+				default:
+					break
+			}
+		}
+	}
+
+	face(dir) {
+		// 0-Down 1-Left 2-Right 3-UP
+		this.dir = dir;
+		this.draw();
+	}
+
+	toggleObject() {
+		if (this.hasObject) {
+			this.sprite.src = "./img/person/" + this.personType + ".png";
+			this.hasObject = false;
+		} else {
+			this.sprite.src = "./img/person/" + this.personType + "_object.png";
+			this.hasObject = true;
+		}
+	}
+
+	sleep(n) {
+		this.sleepCounter = n;
 	}
 }

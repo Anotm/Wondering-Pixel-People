@@ -8,9 +8,12 @@ class Game {
 		this.persons = [];
 		this.persons.push(new Person(true, "recep1", 8, 5, 1));
 		this.persons.push(new Person(true, "soldier", 5, 5));
+		this.persons.push(new Person(true, "voter1", 4, 11));
+		this.persons.push(new Person(false, "voter1", 5, 5));
 
 		this.instructions = [];
 		this.instructions.push(new Instructions("WONDER", this.persons[1]));
+		this.instructions.push(new Instructions("VOTE_3_3_R", this.persons[2]));
 
 		this.roomGrid = roomGrid;
 
@@ -145,9 +148,11 @@ class Game {
 			}
 		}
 
-		// for (const p of this.persons) {
-		// 	p.move();
-		// }
+		for (const p of this.persons) {
+			if (!p.isComp) {
+				p.move();
+			}
+		}
 
 		for (const i of this.instructions) {
 			i.move();

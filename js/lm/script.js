@@ -51,6 +51,7 @@ $('input#cellNumX').on('input',function(e) {
 	CANVAS_WIDTH = GRID_WIDTH * CELL_WIDTH;
 	setConvasDim();
 });
+$('input#cellNumX').val("10");
 
 $('input#cellNumY').on('input',function(e) {
 	const newHeight = $(this).val();
@@ -58,6 +59,7 @@ $('input#cellNumY').on('input',function(e) {
 	CANVAS_HEIGHT = GRID_HEIGHT * CELL_WIDTH;
 	setConvasDim();
 });
+$('input#cellNumY').val("10");
 
 $(canvas).mousedown(function(e){
 	game.mouseClick(e)

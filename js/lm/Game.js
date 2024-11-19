@@ -17,7 +17,11 @@ class Game {
 
 	    const cellX = Math.floor(cursorX / CELL_WIDTH);
 	    const cellY = Math.floor(cursorY / CELL_WIDTH);
-	    template[cellY][cellX] = $("input[type='radio'][name='tile']:checked").val();
+	    str = $("input[type='radio'][name='tile']:checked").val();
+	    if (str == "block_barrier") {
+	    	str = "block_barrier_debug";
+	    }
+	    template[cellY][cellX] = str;
 	    makeRoomGrid();
 	}
 

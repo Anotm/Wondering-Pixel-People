@@ -2,6 +2,29 @@ let template = [];
 let roomGrid = [];
 let game = new Game(roomGrid);
 
+async function downloadTemplate() {
+	const object = template;
+	const filename = "LevelMaker_template.json"
+
+	if(!filename.endsWith('.json')) {
+		filename = `${filename}.json`
+	}
+
+	const json = JSON.stringify(object)
+	const blob = new Blob([json],{ type:'application/json' })
+	const href = await URL.createObjectURL(blob)
+	const link = document.createElement('a')
+
+	link.href = href
+	link.download = filename
+	link.position = 'absolute'
+	link.left = '200vw'
+
+	document.body.appendChild(link)
+	link.click()
+	document.body.removeChild(link)
+}
+
 function makeRoomGrid() {
 	roomGrid = [];
 	for (var y=0; y<GRID_HEIGHT; y++) {
@@ -66,5 +89,3 @@ $(canvas).mousedown(function(e){
 });
 
 setConvasDim();
-
-

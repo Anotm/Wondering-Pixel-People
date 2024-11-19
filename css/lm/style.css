@@ -47,3 +47,9 @@ p {
   position: relative;
   text-align: center;
 }
+
+div.right button {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}

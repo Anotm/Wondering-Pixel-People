@@ -22,22 +22,22 @@ class Game {
 			switch (e.keyCode) {
 				case 87:
 					// UP
-					console.log("Up");
+					// console.log("Up");
 					upKeyDown = true;
 					break;
 				case 65:
 					// LEFT
-					console.log("Left");
+					// console.log("Left");
 					leftKeyDown = true;
 					break;
 				case 83:
 					// DOWN
-					console.log("Down");
+					// console.log("Down");
 					downKeyDown = true;
 					break;
 				case 68:
 					// RIGHT
-					console.log("Right");
+					// console.log("Right");
 					rightKeyDown = true;
 					break;
 				default:

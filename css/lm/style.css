@@ -1,6 +1,33 @@
-* {
+body {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+}
+
+div.selection {
+  background: #eee;
+  padding: 1rem;
+}
+
+div.selection h3 {
   padding: 0;
   margin: 0;
+}
+
+div.selection input[type="radio"] {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+
+div.selection label {
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #ccc;
 }
 
 canvas {

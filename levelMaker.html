@@ -6,15 +6,71 @@
 		<link rel="stylesheet" type="text/css" href="./css/lm/style.css">
 	</head>
 	<body>
-		<div class="x-y-inputs">
-			<input type="number" name="cellNumX" id="cellNumX" min="5" max="40" value="10" />
-			<input type="number" name="cellNumY" id="cellNumY" min="5" max="70" value="10" />
+		<div class="selection">
+			<h3>Floor</h3>
+				<input type="radio" id="t1" name="tile" value="floor_default" checked="checked">
+				<label for="t1">
+					<img src="./img/floor/floor_default.png">floor_default
+				</label><br>
+				<br>
+			<h3>Block</h3>
+				<input type="radio" id="t2" name="tile" value="block_barrier">
+				<label for="t2">
+					<img src="./img/block/block_barrier.png">block_barrier
+				</label><br>
+
+				<input type="radio" id="t3" name="tile" value="block_table_votebox">
+				<label for="t3">
+					<img src="./img/block/block_table_votebox.png">block_table_votebox
+				</label><br>
+
+				<input type="radio" id="t4" name="tile" value="block_table_default">
+				<label for="t4">
+					<img src="./img/block/block_table_default.png">block_table_default
+				</label><br>
+
+				<input type="radio" id="t5" name="tile" value="block_table_votestationL">
+				<label for="t5">
+					<img src="./img/block/block_table_votestationL.png">block_table_votestationL
+				</label><br>
+
+				<input type="radio" id="t6" name="tile" value="block_table_votestationR">
+				<label for="t6">
+					<img src="./img/block/block_table_votestationR.png">block_table_votestationR
+				</label><br>
+
+				<input type="radio" id="t7" name="tile" value="block_table_votestationU">
+				<label for="t7">
+					<img src="./img/block/block_table_votestationU.png">block_table_votestationU
+				</label><br>
+
+				<input type="radio" id="t8" name="tile" value="block_wall_default">
+				<label for="t8">
+					<img src="./img/block/block_wall_default.png">block_wall_default
+				</label><br>
+
+				<input type="radio" id="t9" name="tile" value="block_wall_window">
+				<label for="t9">
+					<img src="./img/block/block_wall_window.png">block_wall_window
+				</label><br>
 		</div>
-		<canvas id="myCanvas" width="480" height="320"></canvas>
-		<p><a href="./index.html">Main Page</a></p>
+
+		<div>
+			<div class="x-y-inputs">
+				<input type="number" name="cellNumX" id="cellNumX" min="5" max="40" value="10" />
+				<input type="number" name="cellNumY" id="cellNumY" min="5" max="70" value="10" />
+			</div>
+			<canvas id="myCanvas" width="480" height="320"></canvas>
+			<p><a href="./index.html">Main Page</a></p>
+		</div>
 
 		<script src="./js/jquery.js"></script>
-		<script src="./js/lm/const.js"></script> 
+		<script src="./js/const.js"></script>
+
+		<script src="./js/Block.js"></script> 
+		<script src="./js/Floor.js"></script> 
+		<script src="./js/lm/Game.js"></script>
+
 		<script src="./js/lm/script.js"></script> 
 	</body>
 </html>

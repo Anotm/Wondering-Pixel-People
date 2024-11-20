@@ -1,8 +1,8 @@
 class Game {
 
 	constructor(roomGrid) {
-		canvas.attr("width", CANVAS_WIDTH);
-		canvas.attr("height", CANVAS_HEIGHT);
+		canvas.attr("width", CANVAS_WIDTH_LM);
+		canvas.attr("height", CANVAS_HEIGHT_LM);
 		// this.drawGrid();
 
 		this.roomGrid = roomGrid;
@@ -30,7 +30,7 @@ class Game {
 	}
 
 	draw() {
-		ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		ctx.clearRect(0, 0, CANVAS_WIDTH_LM, CANVAS_HEIGHT_LM);
 		// this.drawGrid();
 
 		for(const row of this.roomGrid) {

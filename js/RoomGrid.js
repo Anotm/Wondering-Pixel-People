@@ -46,3 +46,5 @@ async function importTemplate() {
 function getRoomGrid() {
 	return roomGrid;
 }
+
+buildGrid();

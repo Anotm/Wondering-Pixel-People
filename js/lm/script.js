@@ -27,9 +27,9 @@ async function downloadTemplate() {
 
 function makeRoomGrid() {
 	roomGrid = [];
-	for (var y=0; y<GRID_HEIGHT; y++) {
+	for (var y=0; y<GRID_HEIGHT_LM; y++) {
 		row = [];
-		for (var x=0; x<GRID_WIDTH; x++) {
+		for (var x=0; x<GRID_WIDTH_LM; x++) {
 			str = template[y][x];
 			if (str.includes("block_")) {
 				xOffset = 0;
@@ -58,9 +58,9 @@ function setConvasDim() {
 	canvas.attr("height", CANVAS_HEIGHT);
 
 	template = [];
-	for (var row = 0; row < GRID_HEIGHT; row++) {
+	for (var row = 0; row < GRID_HEIGHT_LM; row++) {
 		lst = [];
-		for (var floor = 0; floor < GRID_WIDTH; floor++) {
+		for (var floor = 0; floor < GRID_WIDTH_LM; floor++) {
 			lst.push("floor_default");
 		}
 		template.push(lst);
@@ -70,16 +70,16 @@ function setConvasDim() {
 
 $('input#cellNumX').on('input',function(e) {
 	const newWidth = $(this).val();
-	GRID_WIDTH = newWidth;
-	CANVAS_WIDTH = GRID_WIDTH * CELL_WIDTH;
+	GRID_WIDTH_LM = newWidth;
+	CANVAS_WIDTH = GRID_WIDTH_LM * CELL_WIDTH;
 	setConvasDim();
 });
 $('input#cellNumX').val("10");
 
 $('input#cellNumY').on('input',function(e) {
 	const newHeight = $(this).val();
-	GRID_HEIGHT = newHeight;
-	CANVAS_HEIGHT = GRID_HEIGHT * CELL_WIDTH;
+	GRID_HEIGHT_LM = newHeight;
+	CANVAS_HEIGHT = GRID_HEIGHT_LM * CELL_WIDTH;
 	setConvasDim();
 });
 $('input#cellNumY').val("10");

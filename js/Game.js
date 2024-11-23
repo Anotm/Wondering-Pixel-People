@@ -13,7 +13,7 @@ class Game {
 
 		this.instructions = [];
 		this.instructions.push(new Instructions("WONDER", this.persons[1]));
-		this.instructions.push(new Instructions("VOTE_3_3_R", this.persons[2]));
+		this.instructions.push(new Instructions("VOTER_R1_VS1", this.persons[2]));
 
 		this.roomGrid = roomGrid;
 

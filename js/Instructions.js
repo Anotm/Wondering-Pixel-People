@@ -22,7 +22,7 @@ class Instructions {
 		[this.jump, 0]
 	];
 
-	VOTE_3_3_R = [
+	VOTER_R1_VS1 = [
 		[this.moveCell, this.R1],
 		[this.face, this.right],
 		[this.sleep, 10],
@@ -44,8 +44,8 @@ class Instructions {
 			case "WONDER":
 				this.list = this.WONDER;
 				break;
-			case "VOTE_3_3_R":
-				this.list = this.VOTE_3_3_R;
+			case "VOTER_R1_VS1":
+				this.list = this.VOTER_R1_VS1;
 				break;
 			default:
 				this.list = this.WONDER;

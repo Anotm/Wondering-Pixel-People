@@ -1,5 +1,5 @@
 class Instructions {
-	R1 = [6,5];
+	R1 = [6,6];
 	VS1 = [3,3];
 	VB1 = [6,3];
 

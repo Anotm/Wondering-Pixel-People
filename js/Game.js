@@ -6,10 +6,10 @@ class Game {
 		// this.drawGrid();
 
 		this.persons = [];
-		this.persons.push(new Person(true, "recep1", 8, 5, 1));
+		this.persons.push(new Person(true, "recep1", 8, 6, 1));
 		this.persons.push(new Person(true, "soldier", 5, 5));
 		this.persons.push(new Person(true, "voter1", 4, 11));
-		this.persons.push(new Person(false, "voter1", 5, 5));
+		// this.persons.push(new Person(false, "voter1", 5, 5));
 
 		this.instructions = [];
 		this.instructions.push(new Instructions("WONDER", this.persons[1]));
@@ -72,53 +72,7 @@ class Game {
 		setInterval(function(){this.run()}.bind(this), 100);
 	}
 
-	drawGrid() {
-		for (var x = 0; x < GRID_WIDTH; x++) {
-			ctx.beginPath();
-			ctx.moveTo(x*CELL_WIDTH, 0);
-			ctx.lineTo(x*CELL_WIDTH, CANVAS_HEIGHT);
-			ctx.stroke();
-		}
-
-		for (var y = 0; y < GRID_HEIGHT; y++) {
-			ctx.beginPath();
-			ctx.moveTo(0, y*CELL_WIDTH);
-			ctx.lineTo(CANVAS_WIDTH, y*CELL_WIDTH);
-			ctx.stroke();
-		}
-	}
-
-	drawDown(p) {
-		let cellX = Math.floor(p.x / CELL_WIDTH);
-		let cellY = Math.floor(p.y / CELL_WIDTH);
-
-		for (var y=cellY; y<GRID_HEIGHT; y++) {
-			for (var x=Math.max(cellX-1,0); x<GRID_WIDTH; x++) {
-				if (this.roomGrid[y][x].constructor.name == "Block") {
-					ctx.clearRect(x*CELL_WIDTH, y*CELL_WIDTH, CELL_WIDTH, CELL_WIDTH);
-					this.roomGrid[y][x].draw();
-				}
-			}
-		}
-	}
-
-	draw() {
-		ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-		// this.drawGrid();
-
-		for(const row of this.roomGrid) {
-			for (const tile of row) {
-				tile.draw();
-			}
-		}
-
-		for (const p of this.persons) {
-			p.draw()
-			this.drawDown(p);
-		}
-	}
-
-	run() {
+	runPlayerInput() {
 		if (upKeyDown) {
 			for (const p of this.persons) {
 				if (!p.isComp) {
@@ -147,6 +101,56 @@ class Game {
 				}
 			}
 		}
+	}
+
+	drawGrid() {
+		for (var x = 0; x < GRID_WIDTH; x++) {
+			ctx.beginPath();
+			ctx.moveTo(x*CELL_WIDTH, 0);
+			ctx.lineTo(x*CELL_WIDTH, CANVAS_HEIGHT);
+			ctx.stroke();
+		}
+
+		for (var y = 0; y < GRID_HEIGHT; y++) {
+			ctx.beginPath();
+			ctx.moveTo(0, y*CELL_WIDTH);
+			ctx.lineTo(CANVAS_WIDTH, y*CELL_WIDTH);
+			ctx.stroke();
+		}
+	}
+
+	draw() {
+		ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+		// this.drawGrid();
+
+		// Draw only floor
+		for (var y=0; y<GRID_HEIGHT; y++) {
+			for (var x=0; x<GRID_WIDTH; x++) {
+				if (this.roomGrid[y][x].constructor.name == "Floor" || this.roomGrid[y][x].blockType.includes("barrier")) {
+					this.roomGrid[y][x].draw();
+				}
+			}
+		}
+
+		// Draw everything else
+		for (var y=0; y<GRID_HEIGHT; y++) {
+			for (var x=0; x<GRID_WIDTH; x++) {
+				if (this.roomGrid[y][x].constructor.name == "Block" && !this.roomGrid[y][x].blockType.includes("barrier")) {
+					this.roomGrid[y][x].draw();
+				}
+				for (const p of this.persons) {
+					let pY = Math.floor(p.y / CELL_WIDTH);
+					if (pY == y) {
+						p.draw();
+					}
+				}
+			}
+		}
+	}
+
+	run() {
+
+		this.runPlayerInput();
 
 		for (const p of this.persons) {
 			if (!p.isComp) {

@@ -1,15 +1,19 @@
 let roomGrid = [];
 let template = [
-	["block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default"],
-	["block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_default", "block_wall_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "block_table_votestationR", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_votebox", "floor_default", "block_wall_default"],
-	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default"],
-	["floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "floor_default", "floor_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_table_default", "block_table_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
-	["block_wall_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "floor_default", "block_wall_default"],
-	["block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default", "floor_default", "floor_default", "block_wall_default", "block_wall_window", "block_wall_window", "block_wall_default"]
+	["block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default"],
+	["block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default","block_wall_default"],
+	["block_wall_default","floor_default","floor_default","floor_default","floor_default","floor_default","floor_default","floor_default","floor_default","block_wall_default"],
+	["block_wall_default","floor_default","block_table_votestationR","floor_default","floor_default","floor_default","floor_default","block_table_votebox","block_barrier_debug","block_wall_default"],
+	["block_wall_default","floor_default","block_barrier_debug","block_barrier_debug","floor_default","floor_default","floor_default","block_barrier_debug","block_barrier_debug","block_wall_default"],
+	["block_wall_default","floor_default","block_table_votestationR","floor_default","floor_default","floor_default","block_barrier_debug","block_table_default","block_table_default","block_wall_default"],
+	["block_wall_default","floor_default","block_barrier_debug","block_barrier_debug","floor_default","floor_default","floor_default","block_table_default","floor_default","block_wall_default"],
+	["block_wall_default","floor_default","block_table_votestationR","floor_default","floor_default","floor_default","block_barrier_debug","block_table_default","block_table_default","block_wall_default"],
+	["block_wall_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","floor_default","floor_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_wall_default"],
+	["block_wall_default","block_wall_window","block_wall_window","block_wall_default","floor_default","floor_default","block_wall_default","block_wall_window","block_wall_window","block_wall_default"],
+	["floor_default","floor_default","floor_default","floor_default","floor_default","floor_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug"],
+	["block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","floor_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug"],
+	["block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","floor_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug"],
+	["block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug","floor_default","block_barrier_debug","block_barrier_debug","block_barrier_debug","block_barrier_debug"]
 ];
 
 function buildGrid() {

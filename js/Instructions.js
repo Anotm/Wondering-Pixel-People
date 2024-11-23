@@ -30,7 +30,7 @@ class Instructions {
 		[this.sleep, 10],
 		[this.moveCell, this.VS1],
 		[this.face, this.left],
-		[this.sleep, 10],
+		[this.sleep, 15],
 		[this.moveCell, this.VB1],
 		[this.face, this.right],
 		[this.sleep, 5],

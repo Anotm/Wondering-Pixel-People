@@ -26,6 +26,7 @@ class Person {
 		this.yOffset = this.frameHeight-CELL_WIDTH;
 		
 		this.sleepCounter = 0;
+		this.hasInst = false;
 
 		this.face(face);
 	}
@@ -97,7 +98,7 @@ class Person {
 					this.destSet = true;
 					break
 				case 1:
-					this.targetX -=CELL_WIDTH;
+					this.targetX -= CELL_WIDTH;
 					this.destSet = true;
 					break
 				case 2:

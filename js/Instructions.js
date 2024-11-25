@@ -1,9 +1,13 @@
 class Instructions {
 	R1 = [6,6];
+
 	VS1 = [3,3];
+	VS2 = [3,5];
+	VS3 = [3,7];
+
 	VB1 = [6,3];
 
-	exit = [-1, 4];
+	exit = [-1, 10];
 
 	up = 3;
 	down = 0;
@@ -39,7 +43,41 @@ class Instructions {
 		[this.moveCell, this.exit]
 	];
 
-	constructor (list, person) {
+	VOTER_R1_VS2 = [
+		[this.moveCell, this.R1],
+		[this.face, this.right],
+		[this.sleep, 10],
+		[this.toggleObject, null],
+		[this.sleep, 10],
+		[this.moveCell, this.VS2],
+		[this.face, this.left],
+		[this.sleep, 15],
+		[this.moveCell, this.VB1],
+		[this.face, this.right],
+		[this.sleep, 5],
+		[this.toggleObject, null],
+		[this.sleep, 5],
+		[this.moveCell, this.exit]
+	];
+
+	VOTER_R1_VS3 = [
+		[this.moveCell, this.R1],
+		[this.face, this.right],
+		[this.sleep, 10],
+		[this.toggleObject, null],
+		[this.sleep, 10],
+		[this.moveCell, this.VS3],
+		[this.face, this.left],
+		[this.sleep, 15],
+		[this.moveCell, this.VB1],
+		[this.face, this.right],
+		[this.sleep, 5],
+		[this.toggleObject, null],
+		[this.sleep, 5],
+		[this.moveCell, this.exit]
+	];
+
+	constructor (list, person=null) {
 		switch (list) {
 			case "WONDER":
 				this.list = this.WONDER;
@@ -47,12 +85,33 @@ class Instructions {
 			case "VOTER_R1_VS1":
 				this.list = this.VOTER_R1_VS1;
 				break;
+			case "VOTER_R1_VS2":
+				this.list = this.VOTER_R1_VS2;
+				break;
+			case "VOTER_R1_VS3":
+				this.list = this.VOTER_R1_VS3;
+				break;
 			default:
 				this.list = this.WONDER;
 		}
 		this.index = 0;
 		this.person = person;
+		if (this.person == null) {	
+			this.complete = true;
+		} else {
+			this.complete = false;
+			this.person.hasInst = true;
+		}
+	}
+
+	setPerson(person) {
+		this.person = person;
+		this.person.hasInst = true;
 		this.complete = false;
+	}
+
+	removePerson() {
+		this.person = null;
 	}
 
 	moveCell(coord, obj) {
@@ -95,6 +154,9 @@ class Instructions {
 			if (!this.complete) {
 				this.complete = true;
 			}
+			return;
+		}
+		if (this.complete) {
 			return;
 		}
 		this.list[this.index][0](this.list[this.index][1], this);

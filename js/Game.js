@@ -1,23 +1,27 @@
 class Game {
 
-	constructor(roomGrid) {
+	constructor(roomGrid, personsList, instructionsList) {
 		canvas.attr("width", CANVAS_WIDTH);
 		canvas.attr("height", CANVAS_HEIGHT);
 		// this.drawGrid();
 
-		this.persons = [];
-		this.persons.push(new Person(true, "recep1", 8, 6, 1));
-		this.persons.push(new Person(true, "soldier", 5, 5));
-		this.persons.push(new Person(true, "voter1", 4, 11));
-		// this.persons.push(new Person(false, "voter1", 5, 5));
-
-		this.instructions = [];
-		this.instructions.push(new Instructions("WONDER", this.persons[1]));
-		this.instructions.push(new Instructions("VOTER_R1_VS1", this.persons[2]));
-
 		this.roomGrid = roomGrid;
+		this.persons = personsList;
+		this.instructions = instructionsList;
 
-		$(document).keydown(function(e) {
+		this.newVoterTimer = Math.floor(Math.random() * 5) + 5;
+
+		this.onlyComp = true;
+
+		for (const p of this.persons) {
+			if (!p.isComp) {
+				this.onlyComp = false;
+				break;
+			}
+		}
+
+		if (!this.onlyComp) {
+			$(document).keydown(function(e) {
 			let dir = 0;
 			switch (e.keyCode) {
 				case 87:
@@ -68,8 +72,81 @@ class Game {
 					break;
 			}
 		});
+		}
 
 		setInterval(function(){this.run()}.bind(this), 100);
+	}
+
+	mouseClick(e) {
+		const rect = canvas[0].getBoundingClientRect()
+	    const cursorX = e.clientX - rect.left
+	    const cursorY = e.clientY - rect.top
+
+	    const cellX = Math.floor(cursorX / CELL_WIDTH);
+	    const cellY = Math.floor(cursorY / CELL_WIDTH);
+	    console.log("(",cellX, ", ", cellY, ")");
+	}
+
+	advanceVoterQueue() {
+		var inEntrance = false;
+		for (const p of this.persons) {
+			if (Math.floor(p.x / CELL_WIDTH) == 5 && Math.floor(p.y / CELL_WIDTH) == 9) {
+				inEntrance = true;
+			}
+		}
+
+		if (inEntrance) {
+			return;
+		}
+
+		for (const p of this.persons) {
+			if (p.hasInst || !p.personType.includes("voter")) {
+				continue;
+			}
+			p.moveDir(3);
+		}
+	}
+
+	setNewPersonForInstructions() {
+		for (const inst of this.instructions) {
+			if (!inst.complete) {
+				continue;
+			}
+			if (this.newVoterTimer > 0) {
+				this.newVoterTimer --;
+				return;
+			}
+
+			var inEntrance = false;
+			let newPerson = null;
+			for (const p of this.persons) {
+				if (Math.floor(p.x / CELL_WIDTH) == 5 && Math.floor(p.y / CELL_WIDTH) == 9) {
+					inEntrance = true;
+					newPerson = p;
+				}
+			}
+
+			if (!inEntrance) {
+				return;
+			}
+
+			inst.setPerson(newPerson);
+			this.newVoterTimer = Math.floor(Math.random() * 5) + 5;
+		}
+	}
+
+	checkInstructionCompletion() {
+		for (const inst of this.instructions) {
+			if (!inst.complete || inst.person == null) {
+				continue;
+			}
+			const pIndex = this.persons.indexOf(inst.person);
+			inst.person = null;
+			if (pIndex > -1) {
+				this.persons.splice(pIndex, 1);
+			}
+			console.log(this.persons);
+		}
 	}
 
 	runPlayerInput() {
@@ -150,10 +227,14 @@ class Game {
 
 	run() {
 
-		this.runPlayerInput();
+		if (!this.onlyComp) {
+			this.runPlayerInput();
+		}
+
+		this.advanceVoterQueue()
 
 		for (const p of this.persons) {
-			if (!p.isComp) {
+			if (!p.isComp || !p.hasInst) {
 				p.move();
 			}
 		}
@@ -161,6 +242,8 @@ class Game {
 		for (const i of this.instructions) {
 			i.move();
 		}
+
+		this.checkInstructionCompletion();
 
 		this.draw();
 	}

@@ -13,3 +13,16 @@ p {
   position: relative;
   text-align: center;
 }
+
+button {
+  position: relative;
+  margin-top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+input {
+  position: relative;
+  margin-top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}

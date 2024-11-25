@@ -17,6 +17,7 @@ let template = [
 ];
 
 function buildGrid() {
+	roomGrid = [];
 	for (var y=0; y<GRID_HEIGHT; y++) {
 		row = [];
 		for (var x=0; x<GRID_WIDTH; x++) {
@@ -39,12 +40,6 @@ function buildGrid() {
 		}
 		roomGrid.push(row);
 	}
-}
-
-async function importTemplate() {
-	const response = await fetch('./my_json_file.json');
-	template = await response.json();
-	buildGrid();
 }
 
 function getRoomGrid() {

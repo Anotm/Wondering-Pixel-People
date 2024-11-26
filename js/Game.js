@@ -105,6 +105,8 @@ class Game {
 			}
 			p.moveDir(3);
 		}
+
+		this.persons.push(new Person(true, "voter1", 5, 11, 3));
 	}
 
 	setNewPersonForInstructions() {
@@ -134,7 +136,6 @@ class Game {
 			inst.setPerson(newPerson);
 
 			this.newVoterTimer = Math.floor(Math.random() * 20) + 30;
-			this.persons.push(new Person(true, "voter1", 5, 12, 3));
 			break;
 		}
 	}
@@ -149,7 +150,7 @@ class Game {
 			if (pIndex > -1) {
 				this.persons.splice(pIndex, 1);
 			}
-			console.log(this.persons);
+			// console.log(this.persons);
 		}
 	}
 

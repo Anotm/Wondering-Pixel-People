@@ -108,6 +108,7 @@ class Instructions {
 		this.person = person;
 		this.person.hasInst = true;
 		this.complete = false;
+		this.index = 0;
 	}
 
 	removePerson() {

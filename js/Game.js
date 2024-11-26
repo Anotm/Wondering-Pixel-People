@@ -9,7 +9,7 @@ class Game {
 		this.persons = personsList;
 		this.instructions = instructionsList;
 
-		this.newVoterTimer = Math.floor(Math.random() * 5) + 5;
+		this.newVoterTimer = Math.floor(Math.random() * 10) + 30;
 
 		this.onlyComp = true;
 
@@ -109,6 +109,7 @@ class Game {
 
 	setNewPersonForInstructions() {
 		for (const inst of this.instructions) {
+
 			if (!inst.complete) {
 				continue;
 			}
@@ -131,7 +132,10 @@ class Game {
 			}
 
 			inst.setPerson(newPerson);
-			this.newVoterTimer = Math.floor(Math.random() * 5) + 5;
+
+			this.newVoterTimer = Math.floor(Math.random() * 20) + 30;
+			this.persons.push(new Person(true, "voter1", 5, 12, 3));
+			break;
 		}
 	}
 
@@ -226,6 +230,8 @@ class Game {
 	}
 
 	run() {
+
+		this.setNewPersonForInstructions()
 
 		if (!this.onlyComp) {
 			this.runPlayerInput();

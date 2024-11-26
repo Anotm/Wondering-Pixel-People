@@ -9,7 +9,9 @@ persons1.push(new Person(true, "voter1", 5, 12, 3));
 
 instructions1 = [];
 instructions1.push(new Instructions("WONDER", persons1[1]));
-instructions1.push(new Instructions("VOTER_R1_VS1", persons1[2]));
+instructions1.push(new Instructions("VOTER_R1_VS2", persons1[2]));
+instructions1.push(new Instructions("VOTER_R1_VS1"));
+instructions1.push(new Instructions("VOTER_R1_VS3"));
 
 
 let game = new Game(getRoomGrid(), persons1, instructions1);
